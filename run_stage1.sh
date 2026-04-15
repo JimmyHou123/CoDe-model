@@ -1,7 +1,7 @@
 # run stage1
 # Cell 1: Stage 1 DWI denoiser training
-# UPDATE THIS TO YOUR DATA PATH e.g. ".../data/HARDI150.nii.gz"
-# UPDATE THIS TO YOUR SAVING PATH e.g. ".../save/stageI"
+# UPDATE data_root TO YOUR DATA PATH e.g. ".../data/HARDI150.nii.gz"
+# UPDATE save_dir TO YOUR SAVING PATH e.g. ".../save/stageI"
 
 mpiexec -n 1 --allow-run-as-root python -m scripts.cm_train_stage1_dwi \
   --data_root null \
