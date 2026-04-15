@@ -1,7 +1,10 @@
 # run stage1
 # Cell 1: Stage 1 DWI denoiser training
+# UPDATE THIS TO YOUR DATA PATH e.g. ".../data/HARDI150.nii.gz"
+# UPDATE THIS TO YOUR SAVING PATH e.g. ".../save/stageI"
+
 mpiexec -n 1 --allow-run-as-root python -m scripts.cm_train_stage1_dwi \
-  --data_root null \ // UPDATE THIS TO YOUR DATA PATH e.g. ".../data/HARDI150.nii.gz"
+  --data_root null \
   --total_training_steps 150000 \
   --lr_anneal_steps 0 \
   --attention_resolutions 16 \
@@ -18,7 +21,7 @@ mpiexec -n 1 --allow-run-as-root python -m scripts.cm_train_stage1_dwi \
   --resblock_updown True \
   --use_fp16 True \
   --weight_decay 0.0 \
-  --save_dir null \ // UPDATE THIS TO YOUR SAVING PATH e.g. ".../save/stageI"
+  --save_dir null \
   --save_interval 10000 \
   --epoch 157 \
   --log_interval 500 \
