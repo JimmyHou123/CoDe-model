@@ -72,7 +72,7 @@ def main():
 
     train_data = load_data(
         dataroot = args.data_root,
-        valid_mask = [129, 193],
+        valid_mask = [args.valid_mask_start, args.valid_mask_end],
         phase = 'train',
         lr_flip = 0.5,
         stage2_file = None,
@@ -81,7 +81,7 @@ def main():
 
     val_data = load_data(
         dataroot = args.data_root,
-        valid_mask = [129, 193],
+        valid_mask = [args.valid_mask_start, args.valid_mask_end],
         phase = 'val',
         lr_flip = 0,
         stage2_file = None,
@@ -128,6 +128,8 @@ def create_argparser():
         channel_mult = (1, 2, 4, 8, 16),
         in_channels = 4,
         out_channels = 1,
+        valid_mask_start=10,
+        valid_mask_end=160,
     )
     defaults.update(model_and_diffusion_defaults())
     defaults.update(cm_train_defaults())
