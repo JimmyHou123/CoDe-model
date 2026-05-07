@@ -15,7 +15,7 @@
 <!-- Insert architecture figure here. Suggested path: assets/code_architecture.png or assets/code_architecture.pdf -->
 
 <p align="center">
-  <img src="assets/code_architecture.png" width="850">
+  <img src="code_architecture.png" width="850">
 </p>
 
 <p align="center">
@@ -29,7 +29,7 @@
 <!-- Insert qualitative result figure here. Suggested path: assets/code_results.png or assets/code_results.pdf -->
 
 <p align="center">
-  <img src="assets/code_results.png" width="850">
+  <img src="code_results.png" width="850">
 </p>
 
 <p align="center">
@@ -47,18 +47,18 @@ git clone https://github.com/YOUR_USERNAME/CoDe-model-main.git
 cd CoDe-model-main
 ```
 
-Create the environment:
+Create the conda environment using the provided environment file in the outermost repository folder:
 
 ```bash
-conda create -n code python=3.10 -y
-conda activate code
+conda env create -f CoDe_env.yml
+conda activate CoDe
 ```
 
-Install dependencies:
+If your environment name in `CoDe_env.yml` is different, activate that name instead:
 
 ```bash
-pip install torch torchvision torchaudio
-pip install numpy scipy matplotlib opencv-python nibabel dipy tqdm blobfile mpi4py piq torchkde
+conda env list
+conda activate <environment_name>
 ```
 
 Check the setup:
@@ -167,6 +167,7 @@ bash run_all.sh
 
 ## Notes
 
+- `CoDe_env.yml` should be placed in the outermost repository folder, at the same level as `README.md`.
 - Before running, replace all placeholder paths in the `.sh` files with real paths.
 - Use `target_model300000.pt` for testing.
 - If using `--loss_norm lpips_rmt`, make sure `--rmt_npy_path` points to a valid `denoised_mppca.npy` file.
