@@ -61,13 +61,6 @@ conda env list
 conda activate <environment_name>
 ```
 
-Check the setup:
-
-```bash
-python -c "import torch, nibabel, dipy; print('Environment OK')"
-python -c "import torch; print(torch.cuda.is_available())"
-```
-
 ---
 
 ## Data Format
