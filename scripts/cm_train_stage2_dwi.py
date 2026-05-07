@@ -30,7 +30,7 @@ warnings.filterwarnings("ignore")
 torch.manual_seed(42)
 random.seed(0)
 np.random.seed(0)
-torch.cuda.set_device(2)
+torch.cuda.set_device(0)
 
 
 def main():
@@ -101,7 +101,7 @@ def main():
 
     train_data = load_data(
         dataroot = args.data_root,
-        valid_mask = [10, 160],
+        valid_mask = [args.valid_mask_start, args.valid_mask_end],
         phase = 'train',
         lr_flip = 0.5,
         stage2_file = None,
@@ -111,7 +111,7 @@ def main():
 
     val_data = load_data(
         dataroot = args.data_root,
-        valid_mask = [10, 160],
+        valid_mask = [args.valid_mask_start, args.valid_mask_end],
         phase = 'val',
         lr_flip = 0,
         stage2_file = None,
@@ -218,7 +218,9 @@ def create_argparser():
         sigma_min = 0.002,
         sigma_max = 80,
         kl_lambda=1.0,
-        rmt_npy_path=None
+        rmt_npy_path=None,
+        valid_mask_start=10,
+        valid_mask_end=160
     )
     defaults.update(model_and_diffusion_defaults())
     defaults.update(cm_train_defaults())
