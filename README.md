@@ -71,11 +71,29 @@ The input should be a 4D diffusion MRI NIfTI file:
 H × W × S × V
 ```
 
-Example:
+where `H` and `W` are image dimensions, `S` is the number of slices, and `V` is the number of diffusion volumes.
+
+Example datasets:
 
 ```text
-dwi_data/tractoinferno_sub1006/sub-1006__dwi.nii.gz
+Stanford HARDI:
+dwi_data/HARDI150.nii.gz
+
+Sherbrooke 3-shell:
+dwi_data/HARDI193.nii.gz
 ```
+
+You can download both datasets through DIPY.
+
+```bash
+dipy_fetch stanford_hardi --out_dir dwi_data
+dipy_fetch sherbrooke_3shell --out_dir dwi_data
+```
+
+Dataset references:
+
+- Stanford HARDI: available through DIPY as `stanford_hardi`.
+- Sherbrooke 3-shell: available through DIPY as `sherbrooke_3shell`; the dataset record is also hosted by the University of Washington ResearchWorks at `http://hdl.handle.net/1773/38466`.
 
 ---
 
@@ -92,13 +110,6 @@ RMT preprocessing → Stage I training → Stage II training → Testing
 ```bash
 bash run_rmt.sh
 ```
-
-This generates the RMT reference file, usually:
-
-```text
-/path/to/save/rmt/denoised_mppca.npy
-```
-
 Skip this step if you do not use RMT regularization.
 
 ### 2. Train Stage I noise estimation model
@@ -107,53 +118,16 @@ Skip this step if you do not use RMT regularization.
 bash run_stage1.sh
 ```
 
-Expected checkpoint:
-
-```text
-/path/to/save/stage1/model150000.pt
-```
-
 ### 3. Train Stage II consistency model
 
 ```bash
 bash run_stage2.sh
 ```
 
-Expected checkpoint:
-
-```text
-/path/to/save/stage2/target_model300000.pt
-```
-
 ### 4. Test / run inference
 
 ```bash
 bash run_test.sh
-```
-
-The denoised 4D NIfTI output will be saved under the directory specified by `--save_dir` in `run_test.sh`.
-
----
-
-## Run Everything with One Command
-
-Create a `run_all.sh` file:
-
-```bash
-#!/bin/bash
-set -e
-
-bash run_rmt.sh
-bash run_stage1.sh
-bash run_stage2.sh
-bash run_test.sh
-```
-
-Run:
-
-```bash
-chmod +x run_all.sh
-bash run_all.sh
 ```
 
 ---
@@ -165,11 +139,7 @@ bash run_all.sh
 - Use `target_model300000.pt` for testing.
 - If using `--loss_norm lpips_rmt`, make sure `--rmt_npy_path` points to a valid `denoised_mppca.npy` file.
 - If not using RMT regularization, change `--loss_norm lpips_rmt` to `--loss_norm lpips`, `l1`, or `l2`, and remove `--rmt_npy_path`.
-- To select a GPU, run commands with `CUDA_VISIBLE_DEVICES`, for example:
-
-```bash
-CUDA_VISIBLE_DEVICES=0 bash run_stage2.sh
-```
+- To select a GPU, run commands with `CUDA_VISIBLE_DEVICES`
 
 ---
 
