@@ -6,7 +6,7 @@
 
 - **Stage I:** train a noise estimation model from independent noisy measurements.
 - **Stage II:** train a consistency model for fast one-step denoising.
-- **Optional RMT/MPPCA:** generate an RMT-denoised reference for Stage II regularization.
+- **RMT/MPPCA:** generate an RMT-denoised reference for Stage II regularization.
 
 ---
 
