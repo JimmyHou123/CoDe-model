@@ -1,5 +1,7 @@
 # CoDe: A Self-Supervised Consistency Model Framework for MRI Denoising | ISBI 2026
 
+**Paper:** [IEEE Xplore](https://ieeexplore.ieee.org/document/11515485)
+
 ## Overview
 
 **CoDe** is a self-supervised consistency model framework for MRI denoising. It is designed to denoise MRI data without paired clean ground-truth images. The current implementation focuses on diffusion MRI and uses a two-stage pipeline.
